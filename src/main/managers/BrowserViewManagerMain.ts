@@ -1,5 +1,6 @@
 import { BrowserWindow, ipcMain, shell, WebContentsView } from "electron";
 import { getUserAgent } from "../userAgent";
+import { YOUTUBE_MUSIC_AD_BLOCKER } from "../adBlockerScript";
 
 /**
  * Manager to help create and manager browser views
@@ -195,6 +196,14 @@ export class BrowserViewManagerMain {
 
     // Spoof user agent to fix compatibility issues with 3rd party apps
     view.webContents.setUserAgent(getUserAgent());
+
+    view.webContents.on("did-finish-load", () => {
+      if (view.webContents.getURL().includes("music.youtube.com")) {
+        view.webContents
+          .executeJavaScript(YOUTUBE_MUSIC_AD_BLOCKER)
+          .catch(console.error);
+      }
+    });
 
     this.views[view.webContents.id] = view;
     this.topView = view;
