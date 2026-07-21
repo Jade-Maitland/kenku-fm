@@ -1,4 +1,6 @@
 import os from "os";
+import path from "path";
+import fs from "fs";
 import {
   app,
   BrowserWindow,
@@ -89,6 +91,25 @@ const createWindow = (): BrowserWindow => {
   return mainWindow;
 };
 
+const loadExtensions = async () => {
+  const extensionsDir = app.isPackaged
+    ? path.join(process.resourcesPath, "extensions")
+    : path.join(app.getAppPath(), "extensions");
+  if (!fs.existsSync(extensionsDir)) return;
+  for (const name of fs.readdirSync(extensionsDir)) {
+    const extPath = path.join(extensionsDir, name);
+    if (fs.statSync(extPath).isDirectory()) {
+      try {
+        await session.defaultSession.loadExtension(extPath, {
+          allowFileAccess: true,
+        });
+      } catch (e) {
+        console.error(`Failed to load extension "${name}":`, e);
+      }
+    }
+  }
+};
+
 const spoofUserAgent = () => {
   session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
     // Google blocks sign in on CEF so spoof user agent for network requests
@@ -120,6 +141,8 @@ if (!hasSingleInstanceLock) {
       hasWidevineError = true;
       console.error("components failed to load:", JSON.stringify(e, null, 2));
     }
+
+    await loadExtensions();
 
     window = createWindow();
 

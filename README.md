@@ -1,5 +1,82 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
+# Kenku FM — with Ad Blocking
+
+> **This is a fork of [Kenku FM](https://github.com/owlbear-rodeo/kenku-fm) that automatically blocks ads on YouTube Music and other sites using [uBlock Origin](https://github.com/gorhill/uBlock). Everything else works exactly the same as the original.**
+
+---
+
+## Install
+
+### Download the installer (easiest)
+
+1. Go to the [**Releases page**](https://github.com/Jade-Maitland/kenku-fm/releases)
+2. Under the latest release, download **`kenku-fm-win32-x64-Setup.exe`**
+3. Run the installer
+
+> **Windows SmartScreen warning:** Because this build isn't commercially signed, Windows may show a blue "Windows protected your PC" warning. Click **"More info"** then **"Run anyway"** to proceed.
+
+Ad blocking is active as soon as the app opens — nothing else to set up.
+
+---
+
+## Troubleshooting
+
+**Ads are still playing** — make sure you're using this version and not the original Kenku FM. You can check by looking at the title bar; if ad blocking is working, uBlock Origin's filters will be active silently in the background.
+
+**The app won't open after install** — try right-clicking the installer and selecting "Run as administrator".
+
+---
+
+## Build from source
+
+If you'd prefer to build it yourself:
+
+<details>
+<summary>Click to expand build instructions</summary>
+
+### Step 1 — Install Node.js
+
+1. Go to **https://nodejs.org/**
+2. Click the **LTS** download button and run the installer, accepting all defaults
+
+### Step 2 — Install Git
+
+1. Go to **https://git-scm.com/download/win**
+2. Run the installer, clicking **Next** through everything
+
+### Step 3 — Clone and run
+
+Open PowerShell and run these one at a time:
+
+```
+git clone https://github.com/Jade-Maitland/kenku-fm.git
+cd kenku-fm
+npm install
+npm start
+```
+
+`npm install` automatically downloads uBlock Origin — you'll see **"uBlock Origin X.X.X installed"** when it's done.
+
+### Running again later
+
+```
+cd kenku-fm
+npm start
+```
+
+### Updating
+
+```
+cd kenku-fm
+git pull
+npm install
+```
+
+</details>
+
+---
+
 # Kenku FM
 
 Kenku FM is a desktop application for Windows, MacOS and Linux designed to be the easiest way to share music in a Discord voice call.

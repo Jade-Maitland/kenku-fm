@@ -6,6 +6,7 @@ const config = {
     out: "./out",
     icon: "./src/assets/icon",
     appBundleId: "com.kenku.fm",
+    extraResource: ["extensions"],
   },
   makers: [
     {

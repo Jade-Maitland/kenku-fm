@@ -9,7 +9,9 @@
     "package": "env-cmd electron-forge package",
     "make": "env-cmd electron-forge make",
     "publish": "env-cmd electron-forge publish",
-    "lint": "eslint --ext .ts,.tsx ."
+    "lint": "eslint --ext .ts,.tsx .",
+    "postinstall": "node scripts/download-ublock.js",
+    "download-ublock": "node scripts/download-ublock.js"
   },
   "keywords": [],
   "author": {
