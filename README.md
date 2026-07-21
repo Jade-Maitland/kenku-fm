@@ -2,48 +2,22 @@
 
 # Kenku FM — with Ad Blocking
 
-> **This is a fork of [Kenku FM](https://github.com/owlbear-rodeo/kenku-fm) that automatically blocks ads on YouTube Music and other sites using [uBlock Origin](https://github.com/gorhill/uBlock). Everything else works exactly the same as the original.**
+> **This is a fork of [Kenku FM](https://github.com/owlbear-rodeo/kenku-fm) with built-in ad blocking for YouTube Music and other sites. Everything else works exactly the same as the original.**
 
 ---
 
 ## Install
-
-### Step 1 — Download and install Kenku FM
 
 1. Go to the [**Releases page**](https://github.com/Jade-Maitland/kenku-fm/releases)
 2. Download **`kenku-fm-win32-x64-Setup.exe`** and run it
 
 > **Windows SmartScreen warning:** Because this build isn't signed, Windows may show a "Windows protected your PC" warning. Click **"More info"** then **"Run anyway"**.
 
-### Step 2 — Add uBlock Origin
-
-1. Go to **https://github.com/gorhill/uBlock/releases/latest**
-2. Under **Assets**, download **`uBlock0.chromium.zip`**
-3. Open File Explorer and navigate to:
-   ```
-   %APPDATA%\Kenku FM\
-   ```
-   *(Tip: paste that path directly into the File Explorer address bar and press Enter)*
-4. Create a new folder called **`extensions`** inside it
-5. Inside `extensions`, create another folder called **`ublock-origin`**
-6. Open the zip file you downloaded and copy **all the files inside it** into the `ublock-origin` folder
-
-The final structure should look like this:
-```
-%APPDATA%\Kenku FM\extensions\ublock-origin\manifest.json
-                                             background.js
-                                             ... (other files)
-```
-
-### Step 3 — Restart Kenku FM
-
-Close and reopen the app. Ad blocking is now active — no further setup needed.
+Ad blocking is built in — nothing else to set up.
 
 ---
 
 ## Troubleshooting
-
-**Ads are still playing** — double-check the folder structure above. The `manifest.json` file must be directly inside `ublock-origin\`, not in a sub-folder.
 
 **The app won't open after install** — try right-clicking the installer and selecting "Run as administrator".
 

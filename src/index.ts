@@ -1,6 +1,4 @@
 import os from "os";
-import path from "path";
-import fs from "fs";
 import {
   app,
   BrowserWindow,
@@ -13,6 +11,7 @@ import {
 import "./menu";
 import icon from "./assets/icon.png";
 import { getMalformedUserAgent, getUserAgent } from "./main/userAgent";
+import { setupAdBlocker } from "./main/adBlocker";
 import { SessionManager } from "./main/managers/SessionManager";
 import { runAutoUpdate } from "./autoUpdate";
 import { getSavedBounds, saveWindowBounds } from "./bounds";
@@ -91,22 +90,6 @@ const createWindow = (): BrowserWindow => {
   return mainWindow;
 };
 
-const loadExtensions = async () => {
-  const extensionsDir = path.join(app.getPath("userData"), "extensions");
-  if (!fs.existsSync(extensionsDir)) return;
-  for (const name of fs.readdirSync(extensionsDir)) {
-    const extPath = path.join(extensionsDir, name);
-    if (fs.statSync(extPath).isDirectory()) {
-      try {
-        await session.defaultSession.loadExtension(extPath, {
-          allowFileAccess: true,
-        });
-      } catch (e) {
-        console.error(`Failed to load extension "${name}":`, e);
-      }
-    }
-  }
-};
 
 const spoofUserAgent = () => {
   session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
@@ -140,11 +123,10 @@ if (!hasSingleInstanceLock) {
       console.error("components failed to load:", JSON.stringify(e, null, 2));
     }
 
-    await loadExtensions();
-
     window = createWindow();
 
     spoofUserAgent();
+    setupAdBlocker();
 
     if (hasWidevineError) {
       window.once("ready-to-show", () => {
