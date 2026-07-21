@@ -8,29 +8,48 @@
 
 ## Install
 
-### Download the installer (easiest)
+### Step 1 — Download and install Kenku FM
 
 1. Go to the [**Releases page**](https://github.com/Jade-Maitland/kenku-fm/releases)
-2. Under the latest release, download **`kenku-fm-win32-x64-Setup.exe`**
-3. Run the installer
+2. Download **`kenku-fm-win32-x64-Setup.exe`** and run it
 
-> **Windows SmartScreen warning:** Because this build isn't commercially signed, Windows may show a blue "Windows protected your PC" warning. Click **"More info"** then **"Run anyway"** to proceed.
+> **Windows SmartScreen warning:** Because this build isn't signed, Windows may show a "Windows protected your PC" warning. Click **"More info"** then **"Run anyway"**.
 
-Ad blocking is active as soon as the app opens — nothing else to set up.
+### Step 2 — Add uBlock Origin
+
+1. Go to **https://github.com/gorhill/uBlock/releases/latest**
+2. Under **Assets**, download **`uBlock0.chromium.zip`**
+3. Open File Explorer and navigate to:
+   ```
+   %APPDATA%\Kenku FM\
+   ```
+   *(Tip: paste that path directly into the File Explorer address bar and press Enter)*
+4. Create a new folder called **`extensions`** inside it
+5. Inside `extensions`, create another folder called **`ublock-origin`**
+6. Open the zip file you downloaded and copy **all the files inside it** into the `ublock-origin` folder
+
+The final structure should look like this:
+```
+%APPDATA%\Kenku FM\extensions\ublock-origin\manifest.json
+                                             background.js
+                                             ... (other files)
+```
+
+### Step 3 — Restart Kenku FM
+
+Close and reopen the app. Ad blocking is now active — no further setup needed.
 
 ---
 
 ## Troubleshooting
 
-**Ads are still playing** — make sure you're using this version and not the original Kenku FM. You can check by looking at the title bar; if ad blocking is working, uBlock Origin's filters will be active silently in the background.
+**Ads are still playing** — double-check the folder structure above. The `manifest.json` file must be directly inside `ublock-origin\`, not in a sub-folder.
 
 **The app won't open after install** — try right-clicking the installer and selecting "Run as administrator".
 
 ---
 
 ## Build from source
-
-If you'd prefer to build it yourself:
 
 <details>
 <summary>Click to expand build instructions</summary>
@@ -56,7 +75,10 @@ npm install
 npm start
 ```
 
-`npm install` automatically downloads uBlock Origin — you'll see **"uBlock Origin X.X.X installed"** when it's done.
+Then follow **Step 2** above to add uBlock Origin, but use this path instead:
+```
+%APPDATA%\Kenku FM\extensions\ublock-origin\
+```
 
 ### Running again later
 

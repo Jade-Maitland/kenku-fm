@@ -92,9 +92,7 @@ const createWindow = (): BrowserWindow => {
 };
 
 const loadExtensions = async () => {
-  const extensionsDir = app.isPackaged
-    ? path.join(process.resourcesPath, "extensions")
-    : path.join(app.getAppPath(), "extensions");
+  const extensionsDir = path.join(app.getPath("userData"), "extensions");
   if (!fs.existsSync(extensionsDir)) return;
   for (const name of fs.readdirSync(extensionsDir)) {
     const extPath = path.join(extensionsDir, name);

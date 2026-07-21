@@ -95,6 +95,3 @@ dist/
 native_modules/
 
 severus/
-
-# Downloaded extensions (fetched at install time via postinstall)
-extensions/
